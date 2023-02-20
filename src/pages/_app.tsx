@@ -12,7 +12,8 @@ import { mainnet, goerli, foundry } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
-import NavBar from '@/components/NavBar'
+//import NavBar from '@/components/NavBar'
+import Web3NavBar from '@/components/web3/Web3NavBar'
 
 const { chains, provider } = configureChains(
   [foundry, mainnet, goerli],
@@ -39,7 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <RainbowKitProvider chains={chains}>
         <Layout>
           <Layout.Header>
-            <NavBar />
+            <Web3NavBar />
           </Layout.Header>
           <Layout.Content>
             <Component {...pageProps} />
