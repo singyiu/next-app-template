@@ -5,7 +5,7 @@ const NavBar: FC = (props) => {
   return (
     <>
       <Space wrap>
-        <Button>Projects</Button>
+        <Button type="text">NavBarButton</Button>
       </Space>
     </>
   )
