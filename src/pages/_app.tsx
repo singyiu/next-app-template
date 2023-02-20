@@ -5,18 +5,48 @@ import 'antd/dist/antd.css'
 import '@/styles/index.css'
 import { Layout } from 'antd'
 
+import '@rainbow-me/rainbowkit/styles.css'
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { configureChains, createClient, WagmiConfig } from 'wagmi'
+import { mainnet, goerli, foundry } from 'wagmi/chains'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { publicProvider } from 'wagmi/providers/public'
+
 import NavBar from '@/components/NavBar'
+
+const { chains, provider } = configureChains(
+  [foundry, mainnet, goerli],
+  [
+    alchemyProvider({ apiKey: process.env.ALCHEMY_API_KEY || '' }),
+    publicProvider(),
+  ]
+)
+
+const { connectors } = getDefaultWallets({
+  appName: 'next-app',
+  chains,
+})
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+})
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Layout.Header>
-        <NavBar />
-      </Layout.Header>
-      <Layout.Content>
-        <Component {...pageProps} />
-      </Layout.Content>
-      <Layout.Footer></Layout.Footer>
-    </Layout>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <Layout>
+          <Layout.Header>
+            <NavBar />
+          </Layout.Header>
+          <Layout.Content>
+            <Component {...pageProps} />
+          </Layout.Content>
+          <Layout.Footer></Layout.Footer>
+        </Layout>
+      </RainbowKitProvider>
+    </WagmiConfig>
   )
 }
