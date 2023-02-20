@@ -3,12 +3,12 @@ import { useNetwork } from 'wagmi'
 
 import { getContractsOfChain } from '@/contracts/hardhatMetadata'
 
-export const MyContractsContext = createContext({})
+export const HardhatContractsContext = createContext({})
 
 type Props = {
   children?: React.ReactNode
 }
-const MyContractsProvider: FC<Props> = ({ children }) => {
+const HardhatContractsProvider: FC<Props> = ({ children }) => {
   const { chain } = useNetwork()
   const [contracts, setContracts] = useState(getContractsOfChain(chain))
 
@@ -18,10 +18,10 @@ const MyContractsProvider: FC<Props> = ({ children }) => {
   }, [chain])
 
   return (
-    <MyContractsContext.Provider value={contracts}>
+    <HardhatContractsContext.Provider value={contracts}>
       {children}
-    </MyContractsContext.Provider>
+    </HardhatContractsContext.Provider>
   )
 }
 
-export default MyContractsProvider
+export default HardhatContractsProvider

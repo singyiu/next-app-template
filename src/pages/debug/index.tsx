@@ -1,10 +1,10 @@
 import _ from 'lodash'
 
-import { useMyContracts } from '@/hooks/MyContracts'
+import { useHardhatContracts } from '@/hooks/HardhatContracts'
 import Title from '@/components/typography/Title'
 
 export default function Debug() {
-  const contracts = useMyContracts()
+  const contracts = useHardhatContracts()
   return (
     <>
       <Title>Contract names: {_.join(_.keys(contracts), ',')}</Title>
