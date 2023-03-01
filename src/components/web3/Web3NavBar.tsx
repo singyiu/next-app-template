@@ -3,7 +3,7 @@ import { Space, Button, Typography } from 'antd'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useRouter } from 'next/router'
 
-import Title from '@/components/typography/Title'
+import { Title } from '@/components/typography/Title'
 
 const Web3NavBar: FC = (props) => {
   return (

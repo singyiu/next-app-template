@@ -15,7 +15,7 @@ type Props = {
   formatterEnabled: boolean
   formatter?: (value: any) => any
 }
-const ContractReadStatistic: FC<Props> = ({
+export const ContractReadStatistic: FC<Props> = ({
   title,
   contractName,
   contractReadConfig,
