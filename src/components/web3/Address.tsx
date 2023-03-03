@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useEnsName, useEnsAddress } from 'wagmi'
 import { Space, Button } from 'antd'
+import { CopyTwoTone } from '@ant-design/icons'
 
 import { Text } from '@/components/typography/Text'
 
@@ -21,6 +22,7 @@ export type AddressProps = {
    * Set to true for ENS lookup
    */
   ens?: boolean
+  textStyle?: any
 }
 
 /**
@@ -31,6 +33,7 @@ export const Address = ({
   copiable = true,
   shortened = true,
   ens = true,
+  textStyle = { fontSize: 20 },
 }: AddressProps) => {
   const [displayAddress, setDisplayAddress] = useState('')
   const [copyableAddress, setCopyableAddress] = useState('')
@@ -87,16 +90,16 @@ export const Address = ({
   }, [])
 
   return (
-    <Space>
-      <Text css={{ p: 8 }}>{displayAddress}</Text>
+    <Space align="center">
+      <Text style={textStyle}>{displayAddress}</Text>
       {copiable && (
-        <>
-          {!copied ? (
-            <Button onClick={() => handleCopy(copyableAddress)}>copy</Button>
-          ) : (
-            <Text css={{ p: 8 }}>copied</Text>
-          )}
-        </>
+        <Button
+          type="text"
+          shape="circle"
+          icon={<CopyTwoTone />}
+          size="small"
+          onClick={() => handleCopy(copyableAddress)}
+        />
       )}
     </Space>
   )

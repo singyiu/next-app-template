@@ -6,8 +6,12 @@ const inter = Inter({ subsets: ['latin'] })
 type Props = {
   children?: React.ReactNode
 }
-export const Title: FC<Props> = ({ children }) => {
-  return <h2 className={inter.className}>{children}</h2>
+export const Title: FC<Props> = (props) => {
+  return (
+    <h2 className={inter.className} {...props}>
+      {props?.children}
+    </h2>
+  )
 }
 
 export default Title

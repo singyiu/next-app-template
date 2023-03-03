@@ -13,7 +13,7 @@ const Web3NavBar: FC = (props) => {
           <Title>NavBarButton</Title>
         </Button>
         <Button type="text">
-          <Typography.Title level={4}>NavBarButton</Typography.Title>
+          <Title style={{ fontSize: 16 }}>NavBarButton</Title>
         </Button>
       </Space>
       <Space style={{ float: 'right', textAlign: 'right', padding: 8 }}>

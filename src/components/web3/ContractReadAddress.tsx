@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import { Col, Row, Card } from 'antd'
+import { Col, Row, Card, Space } from 'antd'
 
 import { useHardhatContractRead } from '@/hooks/HardhatContracts'
 import { Address } from '@/components/web3/Address'
+import { Text } from '@/components/typography/Text'
 
 type Props = {
   title: string
@@ -19,8 +20,11 @@ export const ContractReadAddress: FC<Props> = ({
   return (
     <Row gutter={16}>
       <Col span={24}>
-        <Card style={{ marginTop: 16 }}>
-          <Address value={dataObj?.data || ''} />
+        <Card style={{ margin: 16 }}>
+          <Space.Compact direction="vertical">
+            <Text style={{ color: '#a9a9a9' }}>{title}</Text>
+            <Address value={dataObj?.data || ''} />
+          </Space.Compact>
         </Card>
       </Col>
     </Row>

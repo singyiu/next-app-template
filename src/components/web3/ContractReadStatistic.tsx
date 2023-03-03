@@ -27,7 +27,7 @@ export const ContractReadStatistic: FC<Props> = ({
   return (
     <Row gutter={16}>
       <Col span={24}>
-        <Card style={{ marginTop: 16 }}>
+        <Card style={{ margin: 16 }}>
           <Statistic
             title={title}
             value={dataObj?.data || 0}

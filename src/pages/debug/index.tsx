@@ -11,21 +11,30 @@ export default function Debug() {
   return (
     <>
       <Title>Contract names: {_.join(_.keys(contracts), ',')}</Title>
-      <ContractReadStatistic
-        title="beneficiary"
+      <ContractReadAddress
+        title="Beneficiary"
         contractName="NpNFT"
         contractReadConfig={{
           functionName: 'beneficiary',
-          //select: (data) => ethers.utils.getAddress(data),
+        }}
+      />
+      <ContractReadStatistic
+        title="Mint Fee"
+        contractName="NpNFT"
+        contractReadConfig={{
+          functionName: 'mintFee',
+          select: (data) => ethers.utils.formatUnits(data, 18),
+        }}
+        formatterEnabled={true}
+      />
+      <ContractReadStatistic
+        title="nextTokenId"
+        contractName="NpNFT"
+        contractReadConfig={{
+          functionName: 'nextTokenId',
+          select: (data) => ethers.utils.formatUnits(data, 0),
         }}
         formatterEnabled={false}
-      />
-      <ContractReadAddress
-        title="beneficiary"
-        contractName="NpNFT"
-        contractReadConfig={{
-          functionName: 'beneficiary',
-        }}
       />
     </>
   )
