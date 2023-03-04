@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Col, Row, Statistic, Card } from 'antd'
 import CountUp from 'react-countup'
 
@@ -12,14 +12,12 @@ type Props = {
   title: string
   contractName: string
   contractReadConfig: any
-  formatterEnabled: boolean
   formatter?: (value: any) => any
 }
 export const ContractReadStatistic: FC<Props> = ({
   title,
   contractName,
   contractReadConfig,
-  formatterEnabled = true,
   formatter = countUpFormatter,
 }) => {
   const dataObj = useHardhatContractRead(contractName, contractReadConfig)
@@ -31,7 +29,7 @@ export const ContractReadStatistic: FC<Props> = ({
           <Statistic
             title={title}
             value={dataObj?.data || 0}
-            formatter={formatterEnabled ? formatter : null}
+            formatter={formatter}
           />
         </Card>
       </Col>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import _ from 'lodash'
 import { ethers } from 'ethers'
 
@@ -8,9 +9,15 @@ import { ContractReadAddress } from '@/components/web3/ContractReadAddress'
 
 export default function Debug() {
   const contracts = useHardhatContracts()
+  const [contractNames, setContractNames] = useState<string>('')
+
+  useEffect(() => {
+    setContractNames(_.join(_.keys(contracts), ','))
+  }, [contracts])
+
   return (
     <>
-      <Title>Contract names: {_.join(_.keys(contracts), ',')}</Title>
+      <Title>Contract names: {contractNames}</Title>
       <ContractReadAddress
         title="Beneficiary"
         contractName="NpNFT"
@@ -25,7 +32,6 @@ export default function Debug() {
           functionName: 'mintFee',
           select: (data) => ethers.utils.formatUnits(data, 18),
         }}
-        formatterEnabled={true}
       />
       <ContractReadStatistic
         title="nextTokenId"
@@ -34,7 +40,6 @@ export default function Debug() {
           functionName: 'nextTokenId',
           select: (data) => ethers.utils.formatUnits(data, 0),
         }}
-        formatterEnabled={false}
       />
     </>
   )
